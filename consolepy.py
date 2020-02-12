@@ -1,3 +1,12 @@
+"""
+XTERM CheatSheet : https://jonasjacek.github.io/colors/
+
+
+
+"""
+
+
+
 from os import system
 from math import sqrt
 
