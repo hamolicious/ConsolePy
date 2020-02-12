@@ -8,7 +8,7 @@ XTERM CheatSheet : https://jonasjacek.github.io/colors/
 
 
 from os import system
-from math import sqrt
+from math import sqrt, pi, sin, cos
 
 class consolepy_error(Exception):
     """ Base class for all errors """
@@ -93,6 +93,46 @@ class consolepy():
             ttl -= 1
             if ttl <= 0:
                 break
+            
+    def draw_rect(self, x, y, w, h, char, xterm, fill=False):
+        """ draws rectange at x y with a size of w h """
+        self.to_render[f"{int(x)}:{int(y)}"] = color(xterm, char)
+        self.to_render[f"{int(x + w)}:{int(y)}"] = color(xterm, char)
+        self.to_render[f"{int(x)}:{int(y + h)}"] = color(xterm, char)
+        self.to_render[f"{int(x + w)}:{int(y + h)}"] = color(xterm, char)
+
+        if not fill:
+            self.draw_line(x, y, x + w, y, char, xterm)
+            self.draw_line(x, y + h, x + w, y + h, char, xterm)
+            self.draw_line(x + w, y, x + w, y + h, char, xterm)        
+            self.draw_line(x, y, x, y + h, char, xterm)
+        else:
+            for i in range(h+1):
+                for j in range(w+1):
+                    self.to_render[f"{int(j + x)}:{int(i + y)}"] = color(xterm, char)
+
+    def draw_circle(self, x, y, r, char, xterm, fill=False):
+        """ draws a circle at x y with a radius r """
+        a = pi
+        while a < pi*3:
+            cx = r * cos(a)
+            cy = r * sin(a)
+            a += 0.01
+
+            self.to_render[f"{int(x + cx)}:{int(y + cy)}"] = color(xterm, char)
+
+            if fill:
+                for i in range(r, 0, -1):
+                    fx = i * cos(a)
+                    fy = i * sin(a)
+                    
+                    self.to_render[f"{int(x + fx)}:{int(y + fy)}"] = color(xterm, char)
+
+
+
+
+
+
 
 
 
