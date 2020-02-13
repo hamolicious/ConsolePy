@@ -25,6 +25,8 @@ while True:
 
 <h3>Quick Docs</h3>
 
+If exact colors are needed, <a href="https://github.com/jonasjacek">jonasjacek</a> has an awesome resource over <a href="https://jonasjacek.github.io/colors/">here</a> providing you with the XTerm codes for all the possible colors
+
 Controll Methods:
 <li>init()</li>
 sets up the module to be used
