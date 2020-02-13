@@ -59,6 +59,7 @@ class consolepy():
         self.to_render = {}
 
     def clear(self):
+        """ Clears console on Linux and Windows """
         system('cls || clear')
 
     #### DRAWING FUNCTIONS
@@ -82,17 +83,11 @@ class consolepy():
         dx /= mag
         dy /= mag
 
-        ttl = 100
-
         while dist(x1, y1, x2, y2) > 1:#int(x1) != x2 and int(y1) != y2:
             x1 += dx
             y1 += dy
             
             self.to_render[f"{int(x1)}:{int(y1)}"] = color(xterm, char)
-
-            ttl -= 1
-            if ttl <= 0:
-                break
             
     def draw_rect(self, x, y, w, h, char, xterm, fill=False):
         """ draws rectange at x y with a size of w h """
