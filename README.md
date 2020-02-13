@@ -1,6 +1,8 @@
 # ConsolePy
 A game and graphics development module for the console [WORK IN PROGRESS]
 
+You don't have to install anything, just download the consolepy.py file and import it into your project!
+
 Main code (will look roughly the same every time)
 ```python3
 # boiler plate code
