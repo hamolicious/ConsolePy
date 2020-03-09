@@ -5,9 +5,6 @@ You don't have to install anything, just download the consolepy.py file and impo
 
 <h2>Docs</h2>
 
-<br>
-<br>
-<br>
 <h4 style="color:blue;">Controll Funtions</h4>
 
 <hr>
