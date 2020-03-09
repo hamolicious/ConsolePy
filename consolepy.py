@@ -31,6 +31,10 @@ def update():
 def rgb_to_xterm(rgb):
     global COLORS
     """ return closest xterm version of rgb """
+
+    if type(rgb) != tuple:
+        raise ValueError('Requires a tuple of (r, g, b) values')
+    
     r1, g1, b1 = rgb
     xterm = 0
 
@@ -49,17 +53,26 @@ def rgb_to_xterm(rgb):
     return f'\u001b[48;5;{xterm}m  \u001b[0m'
 
 def dist(*args):
+
+    for arg in args:
+        if type(arg) not in [int, float, complex]:
+            raise ValueError("Requires a numerical value")
+    
     if len(args) == 4:
         x1, y1, x2, y2 = args
         return sqrt((x2 - x1)**2 + (y2 - y1)**2)
     elif len(args) == 6:
         x1, y1, z1, x2, y2, z2 = args
-    return sqrt((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
+        return sqrt((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
         
 ## SETTINGS FUNCTIONS
 def set_fill(*args):
     global FILL
     """ sets the background fill """
+
+    for arg in args:
+        if type(arg) not in [int, float, complex]:
+            raise ValueError("Requires a numerical value")
 
     if len(args) == 3:
         r, g, b = args
@@ -69,12 +82,20 @@ def set_fill(*args):
         FILL = (col, col, col)
 
 def fill_shape(boolean):
+
+    if type(boolean) != bool:
+        raise ValueError('Requires a boolean')
+    
     global FILL_SHAPE
     FILL_SHAPE = boolean
 
 def screen_size(*args):
     global SCREEN_W, SCREEN_H
     """ sets the screen size """
+
+    for arg in args:
+        if type(arg) not in [int, float, complex]:
+            raise ValueError("Requires a numerical value")
     
     if len(args) == 2:
         SCREEN_W, SCREEN_H = args
@@ -85,6 +106,10 @@ def screen_size(*args):
 def draw_point(*args):
     global SCREEN
     """ draws a single point at xy """
+
+    for arg in args:
+        if type(arg) not in [int, float, complex, Vector]:
+            raise ValueError("Requires a numerical value or vector")
 
     if len(args) == 5:
         x, y, r, g, b = args
@@ -100,6 +125,10 @@ def draw_line(*args):
     global SCREEN
     """ draws a line between x1y1 and x2y2 """
 
+    for arg in args:
+        if type(arg) not in [int, float, complex, Vector]:
+            raise ValueError("Requires a numerical value or vector")
+
     if len(args) == 7:
         x1, y1, x2, y2, r, g, b = args
     elif len(args) == 5:
@@ -114,10 +143,10 @@ def draw_line(*args):
     dx = x2 - x1
     dy = y2 - y1
 
-    dist = point_to_point_dist()
+    d = point_to_point_dist()
 
-    dx /= dist
-    dy /= dist
+    dx /= d
+    dy /= d
 
     while point_to_point_dist() > 1:
         SCREEN[f"{int(x1)}:{int(y1)}"] = col
@@ -127,8 +156,11 @@ def draw_line(*args):
 
 def draw_circle(*args):
     global SCREEN, FILL_SHAPE
-
     """ draws a circle at the xy pos with a radius """
+
+    for arg in args:
+        if type(arg) not in [int, float, complex, Vector]:
+            raise ValueError("Requires a numerical value or vector")
     
     if len(args) == 6:
         x, y, rad, r, g, b = args
@@ -159,6 +191,10 @@ def draw_rect(x, y, w, h, r, g, b):
     global SCREEN
     """ draws a rectangle at XY with a w width and h height """
 
+    for arg in [x, y, w, h, r, g, b]:
+        if type(arg) not in [int, float, complex, Vector]:
+            raise ValueError("Requires a numerical value or vector")
+
     col = rgb_to_xterm((r, g, b))
     
     if FILL_SHAPE:
@@ -176,6 +212,9 @@ def draw_rect(x, y, w, h, r, g, b):
 
 class Vector():
     def __init__(self, x, y):
+        if type(x) not in [int, float, complex] or type(y) not in [int, float, complex]:
+            raise ValueError('A numerical value is required')
+        
         self.x = x
         self.y = y
 
