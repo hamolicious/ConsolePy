@@ -2,12 +2,13 @@
 A game and graphics development module for the console [WORK IN PROGRESS]
 You don't have to install anything, just download the consolepy.py file and import it into your project!
 
+
 <h2>Docs</h2>
 
 <br>
 <br>
 <br>
-<h4>Controll Funtions</h4>
+<h4 style="color:blue;">Controll Funtions</h4>
 
 <hr>
 <strong>consolepy.update()</strong><br>
@@ -34,7 +35,7 @@ Choose if shapes should be filled or not
 <br>
 <br>
 <br>
-<h4>Assistive Funtions</h4>
+<h4 style="color:blue;">Assistive Funtions</h4>
 
 <hr>
 <strong>consolepy.dist()</strong><br>
@@ -48,7 +49,7 @@ Returns the distance between 2 points
 <br>
 <br>
 <br>
-<h4>Drawing Funtions</h4>
+<h4 style="color:blue;">Drawing Funtions</h4>
 
 <hr>
 <strong>consolepy.draw_point()</strong><br>
@@ -88,7 +89,7 @@ draws a rectangle at x, y with a width of w and a height of h
 <br>
 <br>
 <br>
-<h4>Data Structures</h4>
+<h4 style="color:blue;">Data Structures</h4>
 
 <hr>
 <strong>consolepy.Vector()</strong><br>
@@ -98,4 +99,3 @@ draws a rectangle at x, y with a width of w and a height of h
 A data structure that holds an X and Y position<br>
 random2D returns a random unit Vector()
 <br>
-
