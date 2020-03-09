@@ -2,6 +2,7 @@
 from os import system
 from math import sqrt, pi, sin, cos
 from random import randint
+import platform
 
 ## INITIALISATION FUNCTIONS
 def get_colors():
@@ -11,7 +12,7 @@ def get_colors():
 
 ## CONTROLL FUNCTIONS
 def update():
-    global SCREEN, SCREEN_W, SCREEN_H
+    global SCREEN, SCREEN_W, SCREEN_H, CLEAR_CMD
     """ clears and draws the screen """
     
     to_draw = ''
@@ -23,7 +24,7 @@ def update():
             except KeyError:
                 to_draw += rgb_to_xterm(FILL)
 
-    system('cls')
+    system(CLEAR_CMD)
     print(to_draw)
     SCREEN = {}
 
@@ -247,12 +248,16 @@ class Vector():
 # initialise module
 system('color')
 
-global FILL, SCREEN, SCREEN_W, SCREEN_H, COLORS, FILL_SHAPE
+global FILL, SCREEN, SCREEN_W, SCREEN_H, COLORS, FILL_SHAPE, CLEAR_CMD
 COLORS = get_colors()
 FILL = (0, 0, 0)
 FILL_SHAPE = False
 SCREEN = {}
 SCREEN_W, SCREEN_H = 30, 30
+
+CLEAR_CMD = 'clear'
+if platform.system() == 'Windows':
+    CLEAR_CMD = 'cls'
 
 
 
