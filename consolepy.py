@@ -42,8 +42,8 @@ def rgb_to_xterm(rgb):
         g2 = int(COLORS[i].split(' ')[2])
         b2 = int(COLORS[i].split(' ')[3])
 
-        if (dist := dist(r1, g1, b1, r2, g2, b2)) < lowest:
-            lowest = dist
+        if (d := dist(r1, g1, b1, r2, g2, b2)) < lowest:
+            lowest = d
             xterm = xterm_check
         
     return f'\u001b[48;5;{xterm}m  \u001b[0m'
@@ -65,9 +65,22 @@ def set_fill(*args):
         r, g, b = args
         FILL = (r, g, b)
     elif len(args) == 1:
-        col = args
+        col = args[0]
         FILL = (col, col, col)
 
+def fill_shape(boolean):
+    global FILL_SHAPE
+    FILL_SHAPE = boolean
+
+def screen_size(*args):
+    global SCREEN_W, SCREEN_H
+    """ sets the screen size """
+    
+    if len(args) == 2:
+        SCREEN_W, SCREEN_H = args
+    elif len(args) == 1:
+        SCREEN_W, SCREEN_H = args[0], args[0]
+        
 ## DRAWING FUNCTIONS
 def draw_point(*args):
     global SCREEN
@@ -112,6 +125,53 @@ def draw_line(*args):
         x1 += dx
         y1 += dy
 
+def draw_circle(*args):
+    global SCREEN, FILL_SHAPE
+
+    """ draws a circle at the xy pos with a radius """
+    
+    if len(args) == 6:
+        x, y, rad, r, g, b = args
+    elif len(args) == 5:
+        x, y = args[0].get_xy()
+        rad = args[1]
+        r, g, b = args[2 : 5]
+
+    col = rgb_to_xterm((r, g, b))
+
+    theta = 0
+    while theta < pi*2:
+        xoff = int(rad * sin(theta))
+        yoff = int(rad * cos(theta))
+
+        SCREEN[f"{xoff + x}:{yoff + y}"] = col
+
+        if FILL_SHAPE:
+            for r in range(1, rad):
+                xoff = int(r * sin(theta))
+                yoff = int(r * cos(theta))
+
+                SCREEN[f"{xoff + x}:{yoff + y}"] = col
+
+        theta += pi/100
+
+def draw_rect(x, y, w, h, r, g, b):
+    global SCREEN
+    """ draws a rectangle at XY with a w width and h height """
+
+    col = rgb_to_xterm((r, g, b))
+    
+    if FILL_SHAPE:
+        for i in range(h):
+            for j in range(w):
+                SCREEN[f"{j + x}:{i + y}"] = col
+    else:
+        for i in range(h):
+            for j in range(w):
+                if i == 0 or j == 0 or i == h-1 or j == w-1:
+                    SCREEN[f"{j + x}:{i + y}"] = col
+
+
 ## DATA STRUCTURES
 
 class Vector():
@@ -140,16 +200,17 @@ class Vector():
         self.x += vec.x
         self.y += vec.y
 
-    def sub(self, vec)
+    def sub(self, vec):
         self.x -= vec.x
         self.y -= vec.y
 
 # initialise module
 system('color')
 
-global FILL, SCREEN, SCREEN_W, SCREEN_H, COLORS
+global FILL, SCREEN, SCREEN_W, SCREEN_H, COLORS, FILL_SHAPE
 COLORS = get_colors()
 FILL = (0, 0, 0)
+FILL_SHAPE = False
 SCREEN = {}
 SCREEN_W, SCREEN_H = 30, 30
 
