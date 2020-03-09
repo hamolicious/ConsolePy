@@ -1,51 +1,55 @@
 # ConsolePy
 A game and graphics development module for the console [WORK IN PROGRESS]
-
 You don't have to install anything, just download the consolepy.py file and import it into your project!
 
-Main code (will look roughly the same every time)
-```python3
-# boiler plate code
-screen = consolepy()
-screen.init()
 
-# setup a screen
-w, h = 42, 40
-screen.size(w, h)
+<h3>Docs</h3>
 
-# preset the background fill params
-screen.set_fill('  ', 97)
-while True:
+<hr>
+<strong>consolepy.update()</strong><br>
+Renders the screen, clears the console and draws the new frame.
+<br>
 
-  """ main code goes in this loop """
+<hr>
+<strong>consolepy.dist()</strong><br>
+<p>Arguments:</p>
+<p> - dist(x1, y1, x2, y2)</p>
+<p> - dist(x1, y1, z1, x2, y2, z2)</p>
+Returns the distance between 2 points
+<br>
 
-  # clears the current frame in the console
-  screen.clear()
-  # draws the new frame
-  screen.update()
-```
+<hr>
+<strong>consolepy.set_fill()</strong><br>
+<p>Arguments:</p>
+<p> - set_fill(r, g, b)</p>
+<p> - set_fill(col)</p>
+Sets the color of the background, takes either a RGB value or a single value to be used as rgb, e.g set_fill(51) == set_fill(51, 51, 51)
+<br>
+<br>
 
-<h3>Quick Docs</h3>
+<hr>
+<strong>consolepy.draw_point()</strong><br>
+<p>Arguments:</p>
+<p> - draw_point(x, y, r, g, b)</p>
+<p> - draw_point(vec)</p>
+draws a single point at coordinate x, y or at the Vector pos
+<br>
+<br>
 
-If exact colors are needed, <a href="https://github.com/jonasjacek">jonasjacek</a> has an awesome resource over <a href="https://jonasjacek.github.io/colors/">here</a> providing you with the XTerm codes for all the possible colors
+<hr>
+<strong>consolepy.draw_line()</strong><br>
+<p>Arguments:</p>
+<p> - draw_line(x1, y1, x2, y2, r, g, b)</p>
+<p> - draw_line(vec1, vec2, r, g, b)</p>
+draws a line from either x1, y1 to x2, y2 or Vector pos1 to Vector pos2
+<br>
+<br>
 
-Controll Methods:
-<li>init()</li>
-sets up the module to be used
-<li>size(frameWidth, frameHeight)</li>
-defines the size for the frame to be rendered with
-<li>set_fill(characterToFillWith, XTermColorCode)</li>
-sets the background color and character fill when clearing the frame
-<li>update()</li>
-draws the next frame to screen
-<li>clear()</li>
-clears the previous frame from the screen
-<li>draw_point(x, y, char, xterm)</li>
-draws a single character "char" to the screen at x, y coordinates
-<li>draw_line(x1, y1, x2, y2, char, xterm)</li>
-draws a line from x1, y1 to x2, y2 using the "char" character
-<li>draw_rect(x, y, w, h, char, xterm, fill=False)</li>
-draws rectange at x, y with a size of w and h, optional parameter "fill" to choose if to fill the shape
-<li>draw_circle(x, y, r, char, xterm, fill=False)</li>
-draws a circle at x, y with a radius of r, optional parameter "fill" to choose if to fill the shape
-
+<hr>
+<strong>consolepy.Vector()</strong><br>
+<p>Arguments:</p>
+<p> - Vector(x, y)</p>
+<p> - Vector.random2D()</p>
+A data structure that holds an X and Y position
+<br>
+<br>
