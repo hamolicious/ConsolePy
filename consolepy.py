@@ -82,11 +82,12 @@ def set_fill(*args):
         FILL = (col, col, col)
 
 def fill_shape(boolean):
-
+    global FILL_SHAPE
+    """ Chooses if the next shapes will be filled or not """
+    
     if type(boolean) != bool:
         raise ValueError('Requires a boolean')
     
-    global FILL_SHAPE
     FILL_SHAPE = boolean
 
 def screen_size(*args):
